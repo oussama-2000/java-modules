@@ -5,11 +5,15 @@ public class Program {
     public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter number: ");
-        int n = scanner.nextInt();
+        int n;
+        boolean is;
+        int checks;
 
-        boolean is = true;
-        int checks = 0;
+        System.out.print("Enter number: ");
+        n = scanner.nextInt();
+
+        is = true;
+        checks = 0;
 
         if (n <= 1)
         {
