@@ -5,6 +5,7 @@ public class Program {
 
     public static String chart(int total)
     {
+        System.out.println(total);
         String chart = "";
         for (int i = 0; i <= total; i++)
         {
@@ -16,33 +17,46 @@ public class Program {
 
     public static void main(String[] args)
     {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner;
+        int i;
+        String buffer;
+        int exams_num;
+        boolean iter;
+        String exams;
+        int j;
+        int sum;
+        String element;
+        int k;
+        int n;
 
-        int i = 1;
-        String buffer = "";
+        scanner = new Scanner(System.in);
+        i = 1;
+        buffer = "";
+        exams_num = 0;
+        iter = true;
+
         
-        while (i < 3)
+        while (iter)
         {
+            
             System.out.println("Week " + i);
-            String exams = scanner.nextLine();
+            exams = scanner.nextLine();
 
-            // if (exams.length() != 5)
-            // {
-            //     System.err.println("number of tests must be 5 per week.");
-            //     System.exit(-1);
-            // }
-            int j = 0;
-            int sum = 0;
 
-            while (j < 5)
+            j = 0;
+            sum = 0;
+            while (j < exams.length())
             {
-                String element = "";
-                int k = j;
+                element = "";
+                k = j;
                 
-                while (k < 5)
+                while (k < exams.length())
                 {
                     if (exams.charAt(k) == ' ')
+                    {
+                        exams_num++;
                         break;
+                    }
                     element += exams.charAt(k);
                     j++;
                     k++;
@@ -50,15 +64,28 @@ public class Program {
 
                 if (element.length() > 0)
                 {
-                    int n = Integer.parseInt(element);
+                    n = Integer.parseInt(element);
                     if (n == 42)
-                        System.exit(-1);
+                    {
+                        iter = false;
+                        break;
+                    }
                     sum += n;
                 }
                 j++;
             }
 
+            if (!iter)
+                break;
+            
+            if (exams_num != 4)
+            {
+                System.err.println("exams number must be 5 per week.");
+                System.exit(-1);
+            }
+
             buffer += "Week " + i + " " + chart(sum) + "\n";
+            exams_num = 0;
             i++;
         }
         System.out.println(buffer);
